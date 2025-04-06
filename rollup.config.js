@@ -19,17 +19,19 @@ export default [
         sourcemap: true,
       },
     ],
+    external: ["react", "react-dom"], // ✅ Avoid bundling React
     plugins: [
       resolve(),
       commonjs(),
-      typescript({ 
-        tsconfig: "./tsconfig.json"
+      typescript({
+        tsconfig: "./tsconfig.json",
       }),
     ],
   },
   {
     input: "src/index.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
+    external: ["react", "react-dom"], // ✅ Also needed here to avoid type bundling issues
     plugins: [dts()],
   },
 ];
