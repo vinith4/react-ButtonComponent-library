@@ -1,90 +1,52 @@
-import React from "react";
+// Inside your component library's Button.tsx
+import React from 'react';
 
 interface ButtonProps {
   label: string;
-  size?: "small" | "medium" | "large";
-  radius?: string;
-  color?: string;
   backgroundColor?: string;
+  color?: string;
   hoverColor?: string;
-  variant?: "filled" | "outlined" | "text";
-  height?: string | number;
-  width?: string | number;
-  onClick?: () => void;
+  width?: string;
+  height?: string;
+  radius?: string;
   disabled?: boolean;
   shadow?: string;
-  className?: string;
-  style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   label,
-  size = "medium",
-  radius = "4px",
-  color = "#fff",
-  backgroundColor = "#007bff",
-  hoverColor = "#0056b3",
-  variant = "filled",
-  height,
+  backgroundColor,
+  color,
+  hoverColor,
   width,
-  onClick,
-  disabled = false,
-  shadow = "0px 2px 6px rgba(0,0,0,0.15)",
-  className,
-  style,
-}) => {
-  const sizeStyles: Record<string, React.CSSProperties> = {
-    small: { padding: "4px 10px", fontSize: "12px" },
-    medium: { padding: "8px 16px", fontSize: "14px" },
-    large: { padding: "12px 24px", fontSize: "16px" },
-  };
+  height,
+  radius,
+  disabled,
+  shadow,
+  onClick
+}: ButtonProps) => {
+  console.log('Button rendered:', label);
 
-  const baseStyles: React.CSSProperties = {
-    borderRadius: radius,
-    cursor: disabled ? "not-allowed" : "pointer",
-    opacity: disabled ? 0.6 : 1,
-    boxShadow: shadow,
-    height,
-    width,
-    transition: "background-color 0.3s ease",
-    ...sizeStyles[size],
-    ...style,
-  };
-
-  const variantStyles: Record<string, React.CSSProperties> = {
-    filled: {
-      backgroundColor,
-      color,
-      border: "none",
-    },
-    outlined: {
-      backgroundColor: "transparent",
-      color: backgroundColor,
-      border: `2px solid ${backgroundColor}`,
-    },
-    text: {
-      backgroundColor: "transparent",
-      color: backgroundColor,
-      border: "none",
-    },
-  };
+  const [hovered, setHovered] = React.useState(false);
 
   return (
     <button
+      onClick={onClick}
       disabled={disabled}
-      onClick={disabled ? undefined : onClick}
-      className={className}
-      style={{ ...baseStyles, ...variantStyles[variant] }}
-      onMouseOver={(e) => {
-        if (!disabled && variant === "filled") {
-          (e.currentTarget.style.backgroundColor = hoverColor!);
-        }
+      style={{
+        backgroundColor: hovered && hoverColor ? hoverColor : backgroundColor || '#007BFF',
+        color: color || 'white',
+        width: width || '150px',
+        height: height || '40px',
+        borderRadius: radius || '5px',
+        boxShadow: shadow || 'none',
+        border: 'none',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        transition: 'background-color 0.3s ease',
       }}
-      onMouseOut={(e) => {
-        if (!disabled && variant === "filled") {
-          (e.currentTarget.style.backgroundColor = backgroundColor!);
-        }
-      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {label}
     </button>
