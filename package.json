@@ -1,6 +1,6 @@
 {
   "name": "@vinith4/react-button-component-library",
-  "version": "0.0."4,
+  "version": "0.0.4",
   "description": "A react Component library",
   "scripts": {
     "rollup": "rollup -c"
