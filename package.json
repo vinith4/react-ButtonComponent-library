@@ -1,6 +1,6 @@
 {
-  "name": "buttoncomponent",
-  "version": "0.0.1",
+  "name": "@vinith4/react-button-component-library",
+  "version": "0.0.3",
   "description": "A react Component library",
   "scripts": {
     "rollup": "rollup -c"
@@ -25,5 +25,8 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "tslib": "^2.8.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
